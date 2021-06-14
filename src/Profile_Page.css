@@ -1,0 +1,24 @@
+.Left{
+    margin: 10px;
+    text-align: center;
+}
+
+.content{
+    margin:20px;
+}
+
+.head1{
+    color:#f73378;
+    font-size: 60px;
+}
+
+.Right{
+    margin:50px;
+    margin-top: 100px;
+}
+.div-typo{
+    margin-bottom: 20px;
+    border:1px solid black;
+    border-bottom:3px solid black;
+    overflow-y: scroll;
+}
