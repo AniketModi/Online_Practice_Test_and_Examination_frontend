@@ -16,10 +16,11 @@ const useStyle = makeStyles(
         },
         TpyographyStyle1:{
             fontSize:'20px',
-            height:'200px',
+            height:'300px',
+            borderRadius:'15px',
         },
         root:{
-            backgroundColor:'#00b0ff',
+            backgroundColor:'#80A5EE',
             height:'749px',
         }
     }
@@ -36,7 +37,7 @@ const Profile_Page = () => {
     const [lin,setLin] = useState('Linkedin');
 
     return ( 
-        <Grid container spacing={2} height>
+        <Grid container spacing={2} >
             <Grid item md={6}>
                 <div className="Left">
                     <h1 className="head1">Profile</h1>
@@ -45,7 +46,7 @@ const Profile_Page = () => {
                         <Typography  className={classes.TpyographyStyle}> Email : {email}</Typography>
                         <Typography  className={classes.TpyographyStyle}> Institute : {ist}</Typography>
                         <Typography  className={classes.TpyographyStyle}> Gender : {gender}</Typography>
-                        <Typography  className={classes.TpyographyStyle}> Gender : {phn}</Typography>
+                        <Typography  className={classes.TpyographyStyle}> Number : {phn}</Typography>
                     </div>
                     <Button variant="contained" color="secondary" href="#" size='large'>
                         Update

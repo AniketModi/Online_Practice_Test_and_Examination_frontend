@@ -14,7 +14,8 @@ import Container from '@material-ui/core/Container';
 import Input from '@material-ui/core/Input';
 import test from './test1.jpeg';
 import Paper from '@material-ui/core/Paper';
-import {BrowserRouter , Route , Link , NavLink , Switch} from 'react-router-dom';
+import {BrowserRouter , Route , Link , NavLink , Switch , useHistory} from 'react-router-dom';
+import axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,28 +52,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 export default function SignIn() {
   const classes = useStyles();
-
+  const history = useHistory();
   const [email,setEmail] = React.useState();
   const [pass,setPass] = React.useState();
+  const [code,setCode] = React.useState(0);
 
-//   async function onchange(e){
-      
-//       return email;
-//   }.then(
-//     function(e){
-//         console.log(e);
-//     }
-//   )
-//   async function myFunction() {
-//     return "Hello";
-//   }
-//   myFunction().then(
-//     function(value) {myDisplayer(value);}
-//   );
+  const axios = require("axios");
+
+  const onclick = async (e) =>{
+    e.preventDefault();
+    const num = Number(pass);
+      // if(passcode!==num)
+      // {
+      //   alert("Incorrect Code");
+      // } 
+      // else
+
+        const data = await axios
+        .post('http://localhost:4000/SignIn',{
+          email:email,
+          password:pass,
+        })
+        .then((e)=>{
+          console.log(e);
+          //setCode(e.status);
+          console.log(e.status);
+          if(Number(e.status)===200)
+          {
+            localStorage.setItem("UserID",email);
+            localStorage.setItem('accessToken', e.data.accessToken);
+            history.push('/main');
+          }
+          
+        })
+        .catch((err)=>{
+          console.log(err,"Jay");
+          alert('Check EmailId or PassWord');
+          window.location.reload();
+        })
+  }
 
   return (
     <Grid container component="main" maxWidth="xs" className={classes.root}>
