@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Profile_Page from './Profile_Page';
+import Profileform from './Profile_form';
+import ProfilePage from './Profile_Page';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

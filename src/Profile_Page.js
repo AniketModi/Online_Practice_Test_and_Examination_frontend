@@ -1,12 +1,14 @@
-import React , { useState } from 'react';
+import React , { useState,useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import './Profile_Page.css';
+import Avatar from '@material-ui/core/Avatar';
+import "./image.png";
 
-const useStyle = makeStyles(
-    {
+const useStyle = makeStyles((theme)=>({
+    
         TpyographyStyle:{
             fontSize:'25px',
             border:'1px solid black',
@@ -21,34 +23,60 @@ const useStyle = makeStyles(
         },
         root:{
             backgroundColor:'#80A5EE',
-            height:'749px',
-        }
-    }
-);
+            height:'743px',
+        },
+        large: {
+            width: theme.spacing(20),
+            height: theme.spacing(6),
+            backgroundColor:'#ff4081',
+            fontSize:'18px'
+        },
+}));
 
 
 const Profile_Page = () => {
     const classes = useStyle();
-    const [name,setName] = useState('Jay');
-    const [email,setEmail] = useState('201801133@daiict.ac.in');
-    const [ist,setIst] = useState('DAIICT');
-    const [gender,setGender] = useState('Male');
-    const [phn,setPhn] = useState('1234567890');
-    const [lin,setLin] = useState('Linkedin');
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [ist,setIst] = useState('');
+    const [gender,setGender] = useState('');
+    const [phn,setPhn] = useState('');
+    const [lin,setLin] = useState('');
+    const [me,setMe] = useState("");
+    const [role,setRole] = useState("");
+    const axios = require('axios');
+    const data = localStorage.getItem("UserID");
+
+    useEffect(() => {
+        axios 
+        .get(`http://localhost:4000/profile/${data}`)
+        .then((e)=>{
+            console.log(e);
+            setName(e.data.name);
+            setEmail(e.data.email);
+            setIst(e.data.Institute);
+            setGender(e.data.Gender);
+            setLin(e.data.LinkedinProfile);
+            setMe(e.data.About);
+            setPhn(e.data.contact);
+            setRole(e.data.role);
+        })
+    }, [])
 
     return ( 
         <Grid container spacing={2} >
             <Grid item md={6}>
                 <div className="Left">
-                    <h1 className="head1">Profile</h1>
+                    <h2 className="head1">Profile</h2>
                     <div className="content">
                         <Typography  className={classes.TpyographyStyle}> Name : {name}</Typography>
                         <Typography  className={classes.TpyographyStyle}> Email : {email}</Typography>
                         <Typography  className={classes.TpyographyStyle}> Institute : {ist}</Typography>
                         <Typography  className={classes.TpyographyStyle}> Gender : {gender}</Typography>
                         <Typography  className={classes.TpyographyStyle}> Number : {phn}</Typography>
+                        <Typography  className={classes.TpyographyStyle}> Role : {role}</Typography>
                     </div>
-                    <Button variant="contained" color="secondary" href="#" size='large'>
+                    <Button variant="contained" color="secondary" href="/profileform" size='large' className={classes.large}>
                         Update
                     </Button>
                 </div>
@@ -58,9 +86,7 @@ const Profile_Page = () => {
                     <h2>About Me:</h2>
                     <div className="div-typo">
                         <Typography className={classes.TpyographyStyle1}>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit aperiam officiis deleniti pariatur, consequuntur, dolore ipsum maxime iure consectetur error veritatis, aspernatur numquam laboriosam vero? Ab officia distinctio quia sequi?
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo placeat numquam voluptas et quidem sequi obcaecati saepe quos nisi eaque eos ratione incidunt error officia nulla, velit aliquam recusandae quis?
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod illum tempora quas, molestias amet doloribus nesciunt sequi, nostrum fugit accusantium libero? Laborum reprehenderit reiciendis molestiae nostrum praesentium iste minus! Magni!
+                            {me}
                         </Typography>
                     </div>
                     <Typography  className={classes.TpyographyStyle}> Linkedin : {lin}</Typography>

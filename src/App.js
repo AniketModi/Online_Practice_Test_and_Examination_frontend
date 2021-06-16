@@ -2,6 +2,8 @@ import './App.css';
 import Login from './login';
 import Signup from './Signup';
 import Main from './Main';
+import Profile_Page from './Profile_Page';
+import Profileform from './Profile_form';
 import React from 'react';
 import {BrowserRouter , Route , Link , NavLink , Switch} from 'react-router-dom';
 function App() {
@@ -12,6 +14,8 @@ function App() {
             <Route path="/" component={Login} exact={true}/>
             <Route path="/UP" component={Signup} exact={true}/>
             <Route path="/main" component={Main} exact={true}/>
+            <Route path="/profilepage" component={Profile_Page} exact={true}/>
+            <Route path="/profileform" component={Profileform} exact={true}/>
         </Switch>    
       </BrowserRouter>
     </div>
