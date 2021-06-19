@@ -95,7 +95,8 @@ export default function SignIn() {
       //console.log(e.data);
     })
     .catch((err)=>{
-      console.log(err,"Jay");
+      alert("This emailid is invalid or already registered");
+      console.log(err);
     })
   }
 
