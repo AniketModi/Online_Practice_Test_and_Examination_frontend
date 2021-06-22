@@ -84,7 +84,6 @@ export default function SignIn() {
   };
 
   const check = async (e)=>{
-    
     const check1 = await axios
     .post( 'http://localhost:4000/sendEmail/email',{
       email:email,
@@ -133,9 +132,6 @@ export default function SignIn() {
   return (
     <Grid container component="main" maxWidth="xs" className={classes.root}>
       <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image} >
-          <img src={test} alt="img"/>
-        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>

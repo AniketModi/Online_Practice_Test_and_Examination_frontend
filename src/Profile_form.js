@@ -1,30 +1,56 @@
-import React, {Fragment, useState ,useEffect}  from "react";
-import { useHistory } from "react-router-dom";
+import React, {Fragment, useState , useEffect} from "react";
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import './Test_form.css';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Swal from 'sweetalert2'
+import './Profile_form.css'
 
+const useStyles = makeStyles((theme) => ({
+    
+}));
 
-const Profile_form = ()=>{
+const Testform = ()=>{
+    const axios = require("axios");
 
-    const [number,setNumber]=useState("");
-    const [gender,setGender]=useState("");
-    const [name,setName]=useState("");
-    const [lin,setLin]=useState("");
+    const [number,setNumber] = useState("")
     const [me,setMe]=useState("");
-    const axios = require('axios');
-    const data = localStorage.getItem("UserID");
-    const history = useHistory();
+    const [name,setname]=useState("");
+    const [type,setType]=useState("");
+    const [lin,setlin]=useState();
+    const email = localStorage.getItem('UserID');
+    const history=useHistory();
+
+    useEffect( (e)=>{
+        async function func(){
+            await axios
+        .get(`http://localhost:4000/profile/${email}`)
+        .then((e)=>{
+            setname(e.data.name);
+            setNumber(e.data.contact);
+            setMe(e.data.About);
+            setlin(e.data.LinkedinProfile);
+            setType(e.data.Gender);
+            console.log(e,e.data.contact);
+            
+        })
+    }
+
+    func();
+    }
+    ,[]);
 
     const handleSubmit =async e => {
         e.preventDefault();
-        await axios
-        .put('http://localhost:4000/profile',{
-            email:data,
+        axios
+        .put(`http://localhost:4000/profile`,{
+            email:email,
             name:name,
+            Gender:type,
             contact:number,
-            Gender:gender,
             LinkedinProfile:lin,
-            About:me,
+            About:me
         })
         .then((e)=>{
             console.log(e);
@@ -32,70 +58,99 @@ const Profile_form = ()=>{
         .catch((e)=>{
             console.log(e);
         })
+        ;
         history.push('/profilepage');
-      };
-
-      useEffect(() => {
-        axios 
-        .get(`http://localhost:4000/profile/${data}`)
-        .then((e)=>{
-            console.log(e);
-            setName(e.data.name);
-            setGender(e.data.Gender);
-            setLin(e.data.LinkedinProfile);
-            setMe(e.data.About);
-            setNumber(e.data.contact);
-        })
-    }, [])
+    };
 
 
+    const classes = useStyles();
     return (
-        <React.Fragment>
-            <h1 class="heading">Update Profile Page</h1>
-            <div class="container">
-                <form class="form-horizontal">
-                    
-                    <div class="form-group">
-                        <label class="control-label col-sm-2 label_s">Name:</label>
-                        <div class="col-sm-10">
-                            <input type="text" required value={name}  lable={name} onChange={e=>setName(e.target.value)} class="form-control"  placeholder="Enter Your name" />
-                        </div>
-                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2 label_s">Number:</label>
-                        <div class="col-sm-10">
-                            <input type="text" required value={number} lable={number} onChange={e=>setNumber(e.target.value)} class="form-control"  placeholder="Enter Number" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2 label_s">Gender:</label>
-                        <div class="col-sm-10">
-                            <input type="text" required value={gender} lable={gender} onChange={e=>setGender(e.target.value)} class="form-control"  placeholder="Male/Female"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2 label_s">About me:</label>
-                        <div class="col-sm-10">
-                            <input type="text" value={me} placeholder ="About me" lable={me} onChange={e=>setMe(e.target.value)} class="form-control "  />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2 label_s">Linkedin ID:</label>
-                        <div class="col-sm-10">
-                            <input type="text" value={lin} placeholder ="LinkedIN" lable={lin} onChange={e=>setLin(e.target.value)} class="form-control "  />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-5 col-sm-4 ">
-                            <button type="submit" class="btn btn-primary col-sm-6 button_s" onClick={handleSubmit}>Submit</button>
-                        </div>
-                    </div>     
-                </form>
-               </div>
-              
-        </React.Fragment>
+        <Fragment>
+             <h1 class="head_2">Update Profile</h1>
+             <form className={classes.form} >
+                <div class="ip_2">
+                <TextField type="input"
+                    variant="outlined"
+                    margin="normal"
+                    style ={{width: '50%'}}
+                    required
+                    id="name"
+                    name="name"
+                    autoFocus
+                    label="Enter Name"
+                    value={name}
+                    onChange={e=>setname(e.target.value)}
+                ></TextField>
+                </div>
+                <div class="ip_2">
+                <TextField type="input"
+                    variant="outlined"
+                    margin="normal"
+                    style ={{width: '50%'}}
+                    required
+                    id="title"
+                    name="title"
+                    autoFocus
+                    label="Contact Number"
+                    value={number}
+                    onChange={e=>setNumber(e.target.value)}
+                />
+                </div>
+                <div class="ip_2">
+                <TextField type="input"
+                    variant="outlined"
+                    margin="normal"
+                    style ={{width: '50%'}}
+                    required
+                    id="C_name"
+                    name="C_name"
+                    label="About me"
+                    value={me}
+                    autoFocus
+                     onChange={e=>setMe(e.target.value)}
+                />
+                </div>
+                <div>
+                <TextField type="input"
+                    variant="outlined"
+                    margin="normal"
+                    style ={{width: '50%'}}
+                    required
+                    id="type"
+                    name="type"
+                    autoFocus
+                    value={type}
+                    label="Gender" 
+                    onChange={e=>setType(e.target.value)}
+                />
+                </div>
+                <div>
+                <TextField type="input"
+                    variant="outlined"
+                    margin="normal"
+                    style ={{width: '50%'}}
+                    id="marks"
+                    name="marks"
+                    autoFocus
+                    value={lin} 
+                    label="Linked IN"
+                    onChange={e=>setlin(e.target.value)}
+                />
+                </div>
+                <div>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    style ={{width: '25%'}}
+                    className={classes.submit}
+                    onClick={handleSubmit} >
+                    Submit
+                    </Button>
+                </div>
+             </form>
+        </Fragment>
     );
 }
 
-export default Profile_form;
-
+export default Testform;
