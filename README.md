@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Online_Practice_Test_and_Examination
+Online_Practice_Test_and_Examination website includes practice papers for different courses of different Universities, Schools and Institutes. Students and Professors can search the paper by the name of the author or by the title of the paper or by the name of the Institute/University/School. Professor can upload the paper in private or public mode.  Professor can also take the exam/quiz of the students by using these website.  The main purpose of making these project is to provide students practice papers without any charge.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# For Devlopment
+## To run the React app
+### 1. You need Node & npm to run this application.
+##### 1.1 Install the LTS version(includes nodejs and npm both) from https://nodejs.org/en/download/
 
-## Available Scripts
+### 2. Clone the repo.
+##### 2.1 If you have not cloned the repo then clone the repo using the following command:
+```bash
+git clone https://github.com/AniketModi/Online_Practice_Test_and_Examination_frontend
+```
 
-In the project directory, you can run:
+##### 2.2 If you have already cloned the repo then pull the changes of the repo using the following command:
+```bash
+git pull origin main
+```
 
-### `npm start`
+### 3. Run the following commands in the directory where you cloned the repo:
+```bash
+npm install
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 4. Now go on http://localhost:3000/ in a browser to see the app.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Server Repo
+#### [Backend](https://github.com/AniketModi/Online_Practice_Test_and_Examination)
