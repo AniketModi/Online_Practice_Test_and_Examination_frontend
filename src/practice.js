@@ -1,5 +1,5 @@
 
-import React ,{useState}  from 'react';
+import React ,{useState , useHistory}  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
@@ -30,11 +30,16 @@ const useStyles = makeStyles(() => ({
 
   }));
   
-const Practice = ({title,course,ist,id,email,onclick}) => {
+const Practice = ({title,course,ist,id,email,onclick,onclick1}) => {
     
+
     const classes = useStyles();
     function change(){
         onclick({id:id});
+    } 
+
+    function change1(){
+        onclick1({id:id});
     }
 
     return ( 
@@ -44,11 +49,10 @@ const Practice = ({title,course,ist,id,email,onclick}) => {
             <div className={classes.ist}>Institute : {ist}</div>
             <div className={classes.button}>
             <Button onClick={change}>
-            <FavoriteBorderRoundedIcon color="primary" style={{ fontSize: "40px" }} />
+                <FavoriteBorderRoundedIcon color="primary" style={{ fontSize: "40px" }} />
             </Button>
-            
             </div>
-            <Button className={classes.in}>Practice</Button>
+            <Button className={classes.in} onClick={change1}>Practice</Button>
         </div>
      );
 }

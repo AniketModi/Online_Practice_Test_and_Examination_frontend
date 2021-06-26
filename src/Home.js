@@ -1,4 +1,5 @@
 import React ,{useState,useEffect}  from 'react';
+import {useHistory} from 'react-router-dom';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,6 +19,7 @@ import Exam from './exam';
 import Favourite from './favourite';
 import Practice from './practice';
 import { ControlCameraOutlined } from '@material-ui/icons';
+//import Paper from './paper.js';
 
 
 
@@ -92,6 +94,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const history=useHistory();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -187,6 +191,10 @@ export default function PrimarySearchAppBar() {
       wish1();
   }
 
+  async function onclick1({id}){
+    await history.push(`/paper/${id}`);
+  }
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -242,13 +250,12 @@ export default function PrimarySearchAppBar() {
           <h1 className={classes.text}>Practice Paper</h1>
           {data.length>0?
           data.map((e)=>{
-            return <Practice title={e.title} course={e.course} ist={e.college} id={e.id} email={email} onclick={wishlist} key={e.id}/>
+            return <Practice title={e.title} course={e.course} ist={e.college} id={e.id} email={email} onclick={wishlist} onclick1={onclick1} key={e.id}/>
           })
           :
           "No Practice Paper"}
         </div>
       </div>
     </div>
-
   );
 }
