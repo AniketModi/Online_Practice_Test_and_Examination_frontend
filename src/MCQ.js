@@ -40,15 +40,23 @@ const useStyles = makeStyles(() => ({
     in:{
         marginLeft:'2%',
         backgroundColor :'#f73378',
-        width:'',
+        height:'50px',
     },
     index:{
         fontWeight:"bold",
     },
+    option1:{
+        flex:"1",
+        margin:"auto",
+        marginLeft:"20px",
+        marginRight:"20px",
+        fontSize:"20px",
+        border:"1px solid blue",
+    },
 
   }));
 
-const  Questions = ({e,index})=>{
+const  MCQ = ({e,index})=>{
     const classes = useStyles();
     const [temp,setTemp] = useState(false);
 
@@ -64,6 +72,12 @@ const  Questions = ({e,index})=>{
                 <div className={classes.marks}> marks = {e.marks}</div>
                 <Button className={classes.in} onClick={change} >View</Button>
             </div>
+            <div className={classes.option1}>
+                <div>A : {e.option[0]}</div>
+                <div>B : {e.option[1]}</div>
+                <div>C : {e.option[2]}</div>
+                <div>D : {e.option[3]}</div>
+            </div>
             {
                 temp &&
                 <div className={classes.answer}>
@@ -75,4 +89,4 @@ const  Questions = ({e,index})=>{
     )
 }  
 
-export default Questions;
+export default MCQ;
