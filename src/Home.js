@@ -112,6 +112,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleMenuClose = () => {
+    history.push("/profilepage");
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -159,7 +160,7 @@ export default function PrimarySearchAppBar() {
       await axios
       .get('http://localhost:4000/home/practice')
       .then((e)=>{
-        console.log(e);
+        console.log("prac");
         setData(e.data);
       })
     }
@@ -167,7 +168,7 @@ export default function PrimarySearchAppBar() {
       await axios
       .get(`http://localhost:4000/home/wishlist/${email}`)
       .then((e)=>{
-        console.log(e,"wishlist");
+        console.log("wishlist");
         setDatawish(e.data);
       })
       .catch((e)=>{
@@ -176,19 +177,36 @@ export default function PrimarySearchAppBar() {
     }
 
     async function wishlist({id}){
-      console.log(id);
       await axios
       .post("http://localhost:4000/home/wishlist",{
           email:email,
           id:id,
       })
       .then((e)=>{
-          console.log(e,"added");
+          console.log("added");
       })
       .catch((e)=>{
         console.log(e);
       })
       wish1();
+  }
+
+  async function ondelete({id,email})
+  {
+    await axios
+    .delete("http://localhost:4000/home/wishlist",{
+      data: {
+        email:email,
+        id:id,
+      }
+    })
+    .then((e)=>{
+      console.log("deleted");
+    })
+    .catch((e)=>{
+      console.log(e);
+    })
+    wish1();
   }
 
   async function onclick1({id}){
@@ -241,7 +259,7 @@ export default function PrimarySearchAppBar() {
           <h1 className={classes.text}>My favourites</h1>
           {datawish.length>0?
           datawish.map((e)=>{
-            return <Favourite title={e.Title} course={e.Course_name} ist={e.College_name} id={e.Que_paper_id} email={email} index={e.id}/>
+            return <Favourite title={e.Title} course={e.Course_name} ist={e.College_name} id={e.Que_paper_id} email={email} ondelete={ondelete} index={e.id} />
           })
           :
           "No Wish List"}

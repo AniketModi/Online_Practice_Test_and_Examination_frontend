@@ -1,4 +1,3 @@
-
 import React ,{useState , useHistory}  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -43,6 +42,7 @@ const Practice = ({title,course,ist,id,email,onclick,onclick1}) => {
     }
 
     return ( 
+        <>
         <div className={classes.root}>
             <div>Title : {title}</div>
             <div className={classes.course}>Course : {course}</div>
@@ -54,6 +54,7 @@ const Practice = ({title,course,ist,id,email,onclick,onclick1}) => {
             </div>
             <Button className={classes.in} onClick={change1}>Practice</Button>
         </div>
+        </>
      );
 }
  

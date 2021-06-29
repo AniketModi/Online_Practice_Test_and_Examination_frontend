@@ -31,7 +31,9 @@ const useStyles = makeStyles(() => ({
   
 const Practice = ({title,course,ist,id,email,ondelete}) => {
     
-
+    function change(){
+        ondelete({id:id,email:email})
+;    }
     const classes = useStyles();
     return ( 
         <div className={classes.root}>
@@ -40,7 +42,7 @@ const Practice = ({title,course,ist,id,email,ondelete}) => {
             <div className={classes.ist}>Institute : {ist}</div>
             <div className={classes.button}>
             <Button>
-            <FavoriteIcon color="primary" style={{ fontSize: "40px" }} />
+                <FavoriteIcon color="primary" style={{ fontSize: "40px" }} onClick={change}/>
             </Button>
             </div>
             <Button className={classes.in}>Practice</Button>

@@ -43,23 +43,26 @@ const Testform = ()=>{
 
     const handleSubmit =async e => {
         e.preventDefault();
-        axios
-        .put(`http://localhost:4000/profile`,{
-            email:email,
-            name:name,
-            Gender:type,
-            contact:number,
-            LinkedinProfile:lin,
-            About:me
-        })
-        .then((e)=>{
-            console.log(e);
-        })
-        .catch((e)=>{
-            console.log(e);
-        })
-        ;
-        history.push('/profilepage');
+        async function func() {
+            await axios
+            .put(`http://localhost:4000/profile`,{
+                email:email,
+                name:name,
+                Gender:type,
+                contact:number,
+                LinkedinProfile:lin,
+                About:me
+            })
+            .then((e)=>{
+                console.log(e);
+                history.push('/profilepage');
+            })
+            .catch((e)=>{
+                console.log(e);
+            });
+    }
+        func();
+        
     };
 
 
