@@ -82,7 +82,6 @@ const useStyles = makeStyles(() => ({
 
 const Paper = (e) => {
 
-    
     const axios = require('axios');
     const id = e.match.params.id;
     const [data,setData] = useState([]);

@@ -7,12 +7,22 @@ import Button from '@material-ui/core/Button';
 import Swal from 'sweetalert2'
 import './Profile_form.css'
 
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 const useStyles = makeStyles((theme) => ({
     
 }));
 
 const Testform = ()=>{
-    const axios = require("axios");
+  //  const axios = require("axios");
 
     const [number,setNumber] = useState("")
     const [me,setMe]=useState("");
@@ -25,7 +35,7 @@ const Testform = ()=>{
     useEffect( (e)=>{
         async function func(){
             await axios
-        .get(`http://localhost:4000/profile/${email}`)
+        .get(`http://localhost:4000/profile`)
         .then((e)=>{
             setname(e.data.name);
             setNumber(e.data.contact);
@@ -34,6 +44,13 @@ const Testform = ()=>{
             setType(e.data.Gender);
             console.log(e,e.data.contact);
             
+        })
+        .catch((e)=>{
+            if(e.response.status===401 || e.response.status===403)
+            {
+              history.push('/');
+              return null;
+            }    
         })
     }
 
@@ -46,7 +63,7 @@ const Testform = ()=>{
         async function func() {
             await axios
             .put(`http://localhost:4000/profile`,{
-                email:email,
+                //email:email,
                 name:name,
                 Gender:type,
                 contact:number,
@@ -58,6 +75,11 @@ const Testform = ()=>{
                 history.push('/profilepage');
             })
             .catch((e)=>{
+                if(e.response.status===401 || e.response.status===403)
+                {
+                  history.push('/');
+                  return null;
+                }        
                 console.log(e);
             });
     }
