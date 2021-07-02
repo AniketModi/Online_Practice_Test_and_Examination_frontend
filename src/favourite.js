@@ -29,11 +29,16 @@ const useStyles = makeStyles(() => ({
 
   }));
   
-const Practice = ({title,course,ist,id,email,ondelete}) => {
+const Practice = ({title,course,ist,id,email,ondelete,onclick1}) => {
     
     function change(){
         ondelete({id:id,email:email})
 ;    }
+
+    function change1(){
+        onclick1({id:id});
+    }
+
     const classes = useStyles();
     return ( 
         <div className={classes.root}>
@@ -45,7 +50,7 @@ const Practice = ({title,course,ist,id,email,ondelete}) => {
                 <FavoriteIcon color="primary" style={{ fontSize: "40px" }} onClick={change}/>
             </Button>
             </div>
-            <Button className={classes.in}>Practice</Button>
+            <Button className={classes.in} onClick={change1}>Practice</Button>
         </div>
      );
 }
