@@ -20,7 +20,16 @@ import Favourite from './favourite';
 import Practice from './practice';
 import { ControlCameraOutlined } from '@material-ui/icons';
 //import Paper from './paper.js';
-
+const axios=require('axios');
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 
 const useStyles = makeStyles((theme) => ({
@@ -121,6 +130,11 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleMenulogout=()=>{
+    history.push('/logout');
+    setAnchorEl(null);
+    handleMobileMenuClose(); 
+  }
   const handleSearch = (e)=>{
     console.log(e.target.value);
   }
@@ -137,8 +151,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleMenulogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -149,7 +162,7 @@ export default function PrimarySearchAppBar() {
     const [datawish,setDatawish] = useState([]);
     const email = localStorage.getItem("UserID");
 
-    const axios = require('axios');
+//    const axios = require('axios');
 
     useEffect(() => {
       prac1();
@@ -163,15 +176,27 @@ export default function PrimarySearchAppBar() {
         console.log("prac");
         setData(e.data);
       })
+      .catch((e)=>{
+        if(e.response.status===401 || e.response.status===403)
+        {
+          history.push('/');
+          return null;
+        }
+      })
     }
     async function wish1(){
       await axios
-      .get(`http://localhost:4000/home/wishlist/${email}`)
+      .get(`http://localhost:4000/home/wishlist`)
       .then((e)=>{
         console.log("wishlist");
         setDatawish(e.data);
       })
       .catch((e)=>{
+        if(e.response.status===401 || e.response.status===403)
+        {
+          history.push('/');
+          return null;
+        }
         console.log(e);
       })
     }
@@ -179,13 +204,18 @@ export default function PrimarySearchAppBar() {
     async function wishlist({id}){
       await axios
       .post("http://localhost:4000/home/wishlist",{
-          email:email,
+         // email:email,
           id:id,
       })
       .then((e)=>{
           console.log("added");
       })
       .catch((e)=>{
+        if(e.response.status===401 || e.response.status===403)
+        {
+          history.push('/');
+          return null;
+        }
         console.log(e);
       })
       wish1();
@@ -196,7 +226,7 @@ export default function PrimarySearchAppBar() {
     await axios
     .delete("http://localhost:4000/home/wishlist",{
       data: {
-        email:email,
+       // email:email,
         id:id,
       }
     })
@@ -204,6 +234,11 @@ export default function PrimarySearchAppBar() {
       console.log("deleted");
     })
     .catch((e)=>{
+      if(e.response.status===401 || e.response.status===403)
+      {
+        history.push('/');
+        return null;
+      }
       console.log(e);
     })
     wish1();
@@ -218,7 +253,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            App
+            Welcome
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

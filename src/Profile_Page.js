@@ -5,8 +5,20 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import './Profile_Page.css';
 import Avatar from '@material-ui/core/Avatar';
+import {useHistory} from 'react-router-dom';
 import "./image.png";
+const axios = require('axios');
 
+axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+  
 const useStyle = makeStyles((theme)=>({
     
         TpyographyStyle:{
@@ -44,14 +56,15 @@ const Profile_Page = () => {
     const [lin,setLin] = useState('');
     const [me,setMe] = useState("");
     const [role,setRole] = useState("");
-    const axios = require('axios');
+   // const axios = require('axios');
     const data = localStorage.getItem("UserID");
+    const history=useHistory();
 
     useEffect(() => {
         axios 
-        .get(`http://localhost:4000/profile/${data}`)
+        .get(`http://localhost:4000/profile`)
         .then((e)=>{
-            console.log(e);
+                console.log(e);
             setName(e.data.name);
             setEmail(e.data.email);
             setIst(e.data.Institute);
@@ -60,6 +73,15 @@ const Profile_Page = () => {
             setMe(e.data.About);
             setPhn(e.data.contact);
             setRole(e.data.role);
+        })
+        .catch((e)=>{
+          //  console.log(e.status);
+          //  const res=e.json();
+            if(e.response.status===401 || e.response.status===403)
+            {
+              history.push('/');
+              return null;
+            }    
         })
     }, [])
 
