@@ -259,7 +259,7 @@ export default function PrimarySearchAppBar() {
           <h1 className={classes.text}>My favourites</h1>
           {datawish.length>0?
           datawish.map((e)=>{
-            return <Favourite title={e.Title} course={e.Course_name} ist={e.College_name} id={e.Que_paper_id} email={email} ondelete={ondelete} index={e.id} />
+            return <Favourite title={e.Title} course={e.Course_name} ist={e.College_name} id={e.Que_paper_id} email={email} ondelete={ondelete} onclick1={onclick1} index={e.id} />
           })
           :
           "No Wish List"}
