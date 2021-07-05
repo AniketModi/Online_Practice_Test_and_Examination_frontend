@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -71,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: 'inherit',
+    width:"350px",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -99,6 +101,9 @@ const useStyles = makeStyles((theme) => ({
   },
   text:{
     color:'#f73378',
+  },
+  createTest:{
+    backgroundColor:"white",
   },
 }));
 
@@ -135,8 +140,12 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose(); 
   }
+
+  const [filter,setFilter] = useState("");
+
   const handleSearch = (e)=>{
     console.log(e.target.value);
+    setFilter(e.target.value);
   }
 
   const menuId = 'primary-search-account-menu';
@@ -158,13 +167,21 @@ export default function PrimarySearchAppBar() {
   const [title,setTitle] = useState("End-sem");
   const [course,setCourse] = useState("OS");
   const [ist,setIst] = useState("DAIICT");
-    const [data,setData] = useState([]);
-    const [datawish,setDatawish] = useState([]);
-    const email = localStorage.getItem("UserID");
-
-//    const axios = require('axios');
+  const [data,setData] = useState([]);
+  const [datawish,setDatawish] = useState([]);
+  const email = localStorage.getItem("UserID");
+  const [role,setRole] = useState(""); 
 
     useEffect(() => {
+      axios 
+        .get(`http://localhost:4000/profile`)
+        .then((e)=>{
+          console.log(e);
+          setRole(e.data.role);
+        })
+        .catch((e)=>{
+          console.log(e,"error in pfofile data");
+        })
       prac1();
       wish1();
     }, [])
@@ -248,6 +265,10 @@ export default function PrimarySearchAppBar() {
     await history.push(`/paper/${id}`);
   }
 
+  function createtest(){
+    history.push('./creattest');
+  }
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -270,6 +291,7 @@ export default function PrimarySearchAppBar() {
             />
           </div>
           <div className={classes.grow} />
+           {role === "Professor" && <Button className={classes.createTest} onClick={createtest}>Create Test</Button>}
           <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"
@@ -303,7 +325,11 @@ export default function PrimarySearchAppBar() {
           <h1 className={classes.text}>Practice Paper</h1>
           {data.length>0?
           data.map((e)=>{
-            return <Practice title={e.title} course={e.course} ist={e.college} id={e.id} email={email} onclick={wishlist} onclick1={onclick1} key={e.id}/>
+            if(e.course.includes(filter)===true || e.title.includes(filter)===true || e.college.includes(filter)===true)
+            {
+              return <Practice title={e.title} course={e.course} ist={e.college} id={e.id} email={email} onclick={wishlist} onclick1={onclick1} key={e.id}/>
+            }
+            return null;
           })
           :
           "No Practice Paper"}
