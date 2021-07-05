@@ -7,6 +7,7 @@ import Profileform from './Profile_form';
 import React from 'react';
 import Paper from './paper';
 import Logout from './logout';
+import CreatTest from './Test_form';
 
 import {BrowserRouter , Route , Link , NavLink , Switch} from 'react-router-dom';
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/profilepage" component={Profile_Page} exact={true}/>
             <Route path="/profileform" component={Profileform} exact={true}/>
             <Route path="/logout" component={Logout} exact={true}/>
+            <Route path="/creattest" component={CreatTest} exact={true}/>
         </Switch>    
       </BrowserRouter>
     </div>
