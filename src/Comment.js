@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import './comment.css'
 
 const AddTask = ({ onAdd }) => {
   //const [name, setName] = useState('Jay')
@@ -6,7 +7,7 @@ const AddTask = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-
+    console.log("Here");
     if (!comm) {
       alert('Please add a comment')
       return
@@ -18,19 +19,14 @@ const AddTask = ({ onAdd }) => {
   }
 
   return (
-    <form className='add-form' onSubmit={onSubmit}>
-      <div className='form-control'>
-        <label>Comments</label>
+      <form className='inputWithButton' onSubmit={onSubmit}>
         <input
-          className='add'
           type='text'
-          placeholder='Add Comment'
           value={comm}
           onChange={(e) => setComm(e.target.value)}
         />
-      </div>
-      <input type='submit' value='Add Comment' className='btn btn-block' />
-    </form>
+      <button type='submit' value='Add Comment'>Add Comment</button>
+      </form>
   )
 }
 
