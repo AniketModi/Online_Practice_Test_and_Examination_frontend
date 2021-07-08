@@ -104,6 +104,7 @@ const useStyles = makeStyles((theme) => ({
   },
   createTest:{
     backgroundColor:"white",
+    marginLeft:'10px'
   },
 }));
 
@@ -269,6 +270,9 @@ export default function PrimarySearchAppBar() {
     history.push('./creattest');
   }
 
+  function template_test(){
+    history.push('./template');
+  }
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -291,7 +295,8 @@ export default function PrimarySearchAppBar() {
             />
           </div>
           <div className={classes.grow} />
-           {role === "Professor" && <Button className={classes.createTest} onClick={createtest}>Create Test</Button>}
+          {role === "Professor" && <Button className={classes.createTest} onClick={createtest}>Create Test</Button>}
+           {role === "Professor" && <Button className={classes.createTest} onClick={template_test}>Template</Button>}
           <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"

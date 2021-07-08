@@ -15,6 +15,15 @@ import Button from '@material-ui/core/Button';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 
 const useStyles = makeStyles({
@@ -84,9 +93,16 @@ export default function Guide(){
               timer: 1500
               })
         })
+        .catch((e)=>{
+          if(e.response.status===401 || e.response.status===403)
+          {
+            history.push('/');
+            return null;
+          }  
+        })
 
     } catch (err) {
-        console.error(err.message)
+        console.error(err.message);
     }
     }
 
@@ -110,8 +126,13 @@ export default function Guide(){
               showConfirmButton: false,
               timer: 1500
               })
-        })
-
+        }).catch((e)=>{
+            if(e.response.status===401 || e.response.status===403)
+            {
+              history.push('/');
+              return null;
+            }  
+          })  
     } catch (err) {
         console.error(err.message)
     }
@@ -119,7 +140,7 @@ export default function Guide(){
     }
 
     const Back = async(e)=>{
-      history.push('/home');
+      history.push('/main');
     }
    
     return(

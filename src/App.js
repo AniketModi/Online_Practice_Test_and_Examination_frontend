@@ -8,6 +8,7 @@ import React from 'react';
 import Paper from './paper';
 import Logout from './logout';
 import CreatTest from './Test_form';
+import Guide from './Guide'
 
 import {BrowserRouter , Route , Link , NavLink , Switch} from 'react-router-dom';
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/profileform" component={Profileform} exact={true}/>
             <Route path="/logout" component={Logout} exact={true}/>
             <Route path="/creattest" component={CreatTest} exact={true}/>
+            <Route path="/template" component={Guide} exact={true}/>
         </Switch>    
       </BrowserRouter>
     </div>
