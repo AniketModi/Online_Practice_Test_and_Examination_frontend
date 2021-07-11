@@ -75,7 +75,7 @@ export default function Guide(){
     const getTest = async(e) => {
       try {
             
-        await axios.get(`http://localhost:4000/guide/xlsx`,{responseType: 'arraybuffer'}).then((response) => {
+        await axios.get(`http://localhost:4000/guide/paper`,{responseType: 'arraybuffer'}).then((response) => {
             console.log(response)
             const newBlob = new Blob([response.data], {type: "application/xlsx"});
             //const dataUrl = window.URL.createObjectURL(newBlob);
@@ -109,7 +109,7 @@ export default function Guide(){
     const getList = async(e)=>{
       try {
             
-        await axios.get(`http://localhost:4000/guide/csv`,{responseType: 'arraybuffer'}).then((response) => {
+        await axios.get(`http://localhost:4000/guide/list`,{responseType: 'arraybuffer'}).then((response) => {
             console.log(response)
             const newBlob = new Blob([response.data], {type: "application/csv"});
             //const dataUrl = window.URL.createObjectURL(newBlob);
@@ -143,6 +143,13 @@ export default function Guide(){
       history.push('/main');
     }
    
+    const token=localStorage.getItem("accessToken");
+    if(!token)
+    {
+      history.push('/');
+      return null;
+    }
+
     return(
         <React.Fragment>
           <AppBar className={classes.app}>
@@ -183,7 +190,7 @@ export default function Guide(){
              </TableCell>
           </TableRow>        
           <TableRow>
-             <TableCell className={classes.inst_2}>If you wish to make paper private upload student list as follows : <button onClick={getList} class="fa fa-download"></button></TableCell>
+             <TableCell className={classes.inst_2}>If you wish to make paper private upload student list in xlsx format as follows : <button onClick={getList} class="fa fa-download"></button></TableCell>
           </TableRow> 
          
         </TableBody>

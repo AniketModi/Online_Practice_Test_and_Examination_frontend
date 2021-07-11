@@ -273,6 +273,8 @@ export default function PrimarySearchAppBar() {
   function template_test(){
     history.push('./template');
   }
+
+  
   return (
     <div className={classes.grow}>
       <AppBar position="static">
