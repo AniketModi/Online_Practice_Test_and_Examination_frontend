@@ -18,7 +18,7 @@ const Admin = () => {
 
     const handlePassword = async(e)=>{
             if(passcode.length!==0){
-            const res =await  axios.post("http://localhost:4000/admin",JSON.stringify([passcode]),head);
+            const res =await  axios.post(`${process.env.REACT_APP_URL}/admin`,JSON.stringify([passcode]),head);
             console.log(res.data);
             if(res.data==="YES"){
                 Swal.fire({

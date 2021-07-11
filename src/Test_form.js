@@ -61,7 +61,7 @@ const Testform =()=>{
                 console.log(body);
                 const head = {headers:  {"Content-Type": "application/json"}};
                 if(option==="PDF"){
-                    const res1 = await axios.post(`http://localhost:4000/create_test`, JSON.stringify(body),head)
+                    const res1 = await axios.post(`${process.env.REACT_APP_URL}/create_test`, JSON.stringify(body),head)
                     console.log("response");
                     console.log(res1.data);  
                     if(res1.data.length!==0){
@@ -71,7 +71,7 @@ const Testform =()=>{
                     }
                 }  
                 else{
-                  const res2 = await axios.post(`http://localhost:4000/create_test/own`, JSON.stringify(body),head)
+                  const res2 = await axios.post(`${process.env.REACT_APP_URL}/create_test/own`, JSON.stringify(body),head)
                     console.log("response");
                     console.log(res2.data);  
                     if(res2.data.length!==0){
@@ -91,7 +91,7 @@ const Testform =()=>{
                 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
                 let fd = new FormData();
                 fd.append('file',questions)
-                const res =await axios.post(`http://localhost:4000/create_test/paper/${paper_id}`, fd, config)
+                const res =await axios.post(`${process.env.REACT_APP_URL}/create_test/paper/${paper_id}`, fd, config)
                 console.log("res");
                 console.log(res);
                 uploadList_submit(paper_id);
@@ -104,7 +104,7 @@ const Testform =()=>{
               const config = { headers: { 'Content-Type': 'multipart/form-data' } };
               let fd = new FormData();
               fd.append('file',questions)
-              const res =await axios.post(`http://localhost:4000/create_test/paper_xl/${paper_id}`, fd, config)
+              const res =await axios.post(`${process.env.REACT_APP_URL}/create_test/paper_xl/${paper_id}`, fd, config)
               console.log("res");
               console.log(res);
               uploadList_submit(paper_id);
@@ -120,7 +120,7 @@ const Testform =()=>{
                   const config2 = { headers: { 'Content-Type': 'multipart/form-data' } };
                   let fd2 = new FormData();
                   fd2.append('file',student)
-                  const res2 =await axios.post(`http://localhost:4000/create_test/list/${paper_id}`, fd2, config2)
+                  const res2 =await axios.post(`${process.env.REACT_APP_URL}/create_test/list/${paper_id}`, fd2, config2)
                   console.log("res");
                   console.log(res2);
               }

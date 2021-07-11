@@ -41,7 +41,7 @@ const Adminmain = () => {
     const getPDF = async(id) =>{
         try {
             
-            await axios.get(`http://localhost:4000/admin/main/pdf/${id}`,{responseType: 'arraybuffer'}).then((response) => {
+            await axios.get(`${process.env.REACT_APP_URL}/admin/main/pdf/${id}`,{responseType: 'arraybuffer'}).then((response) => {
                 console.log(response)
                 const newBlob = new Blob([response.data], {type: "application/pdf"});
                 //const dataUrl = window.URL.createObjectURL(newBlob);
@@ -63,7 +63,7 @@ const Adminmain = () => {
    const getAllPaper = async() => {
       try {
           
-          const res = await fetch(`http://localhost:4000/admin/main`)
+          const res = await fetch(`${process.env.REACT_APP_URL}/admin/main`)
           const jsonData = await res.json();
 
           console.log(jsonData)
@@ -77,7 +77,7 @@ const Adminmain = () => {
 
 
   const deletePaper = async(id)=>{
-      const paper = await axios.delete(`http://localhost:4000/admin/main/${id}`)
+      const paper = await axios.delete(`${process.env.REACT_APP_URL}/admin/main/${id}`)
       if(paper.data==="deleted"){
          Swal.fire({
             position: 'top-center',
