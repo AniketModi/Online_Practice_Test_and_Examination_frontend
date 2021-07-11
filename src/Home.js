@@ -175,7 +175,7 @@ export default function PrimarySearchAppBar() {
 
     useEffect(() => {
       axios 
-        .get(`http://localhost:4000/profile`)
+        .get(`${process.env.REACT_APP_URL}/profile`)
         .then((e)=>{
           console.log(e);
           setRole(e.data.role);
