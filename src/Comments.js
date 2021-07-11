@@ -31,7 +31,7 @@ export default function App({id}) {
 
     const fetchTasks = async () => {
       await axios 
-      .get(`http://localhost:4000/comment/getcomment/${id}`)
+      .get(`${process.env.REACT_APP_URL}/comment/getcomment/${id}`)
       .then((e)=>{
           console.log(e);
           setTasks(e.data);      
@@ -59,7 +59,7 @@ export default function App({id}) {
     //setTasks(tasks => [...tasks, task]);
     console.log("task Added from addtask", tasks);
     const temp = axios
-      .post('http://localhost:4000/comment/postcomment', {
+      .post(`${process.env.REACT_APP_URL}/comment/postcomment`, {
         comment: task.comment,
         que_paper_id:id,
       })
