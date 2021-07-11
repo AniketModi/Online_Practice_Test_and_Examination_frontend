@@ -143,6 +143,13 @@ export default function Guide(){
       history.push('/main');
     }
    
+    const token=localStorage.getItem("accessToken");
+    if(!token)
+    {
+      history.push('/');
+      return null;
+    }
+
     return(
         <React.Fragment>
           <AppBar className={classes.app}>
@@ -183,7 +190,7 @@ export default function Guide(){
              </TableCell>
           </TableRow>        
           <TableRow>
-             <TableCell className={classes.inst_2}>If you wish to make paper private upload student list as follows : <button onClick={getList} class="fa fa-download"></button></TableCell>
+             <TableCell className={classes.inst_2}>If you wish to make paper private upload student list in xlsx format as follows : <button onClick={getList} class="fa fa-download"></button></TableCell>
           </TableRow> 
          
         </TableBody>

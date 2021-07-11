@@ -8,22 +8,24 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './Test_form.css';
+import {useHistory} from 'react-router-dom';
+import { Typography } from "@material-ui/core";
 
-// axios.interceptors.request.use(
-//   (config) => {
-//     config.headers.authorization = `Bearer ${localStorage.getItem("accessToken")}`;
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const useStyles = makeStyles((theme) => ({
     
 }));
 
-const Testform = ()=>{
+const Testform =()=>{
 
     const [title,setTitle] = useState("")
     const [college_name,setCollege_name]=useState("");
@@ -35,8 +37,7 @@ const Testform = ()=>{
     const [end_date,setEnd_date]=useState("");
     const [marks,setMarks]=useState();
     const [questions,setQuestions]=useState(null);
-    const [student,setStudent]=useState(null);
-    
+    const [student,setStudent]=useState(null);  
 
     const handleSubmit = async(e)=>{
       e.preventDefault();
@@ -144,169 +145,178 @@ const Testform = ()=>{
       setOp(event.target.value)
     }
     const classes = useStyles();
-    return (
-        <Fragment>
-             <h1 class="head_2">Create Test</h1>
-             <form className={classes.form} >
-             <div class="ip_2">
-             <TextField type="input"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                required
-                id="title"
-                label="Enter Title of the paper"
-                name="title"
-                autoFocus
-                 onChange={e=>setTitle(e.target.value)}
-              />
-              </div>
-              <div class="ip_2">
-             <TextField type="input"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                required
-                id="name"
-                label="Enter Your Name"
-                name="name"
-                autoFocus
-                value={prof_name} onChange={e=>setProf_name(e.target.value)}
-              />
-              </div>
-              <div class="ip_2">
-              <TextField type="input"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                required
-                id="I_name"
-                label="Enter Institute Name"
-                name="I_name"
-                autoFocus
-                value={college_name} onChange={e=>setCollege_name(e.target.value)}
-              />
-              </div>
-              <div>
-              <TextField type="input"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                required
-                id="C_name"
-                label="Enter Course Name"
-                name="C_name"
-                autoFocus
-                value={course_name} onChange={e=>setCourse_name(e.target.value)}
-              />
-              </div>
-              <div >
-                  <RadioGroup aria-label="Type" name="type2" value={type} onChange={handleChange} row={true}>
-                      <FormControlLabel class="radio_2" value="Exam" control={<Radio />} label="Exam" />
-                      <FormControlLabel class="radio_2" value="Practice" control={<Radio />} label="Practice" />
-                  </RadioGroup>
-              </div>
-              <div>
-              <TextField type="input"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                id="marks"
-                label="Enter Marks"
-                name="marks"
-                autoFocus
+    const token=localStorage.getItem("accessToken");
+    const history=useHistory();
 
-                value={marks} onChange={e=>setMarks(e.target.value)}
-              />
-              </div>
+    if(!token)
+    {
+      history.push('/');
+      return null;
+    }
+      return (
+          <Fragment>
+              <h1 class="head_2">Create Test</h1>
+              <form className={classes.form} >
+              <div class="ip_2">
+              <TextField type="input"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  required
+                  id="title"
+                  label="Enter Title of the paper"
+                  name="title"
+                  autoFocus
+                  onChange={e=>setTitle(e.target.value)}
+                />
+                </div>
+                <div class="ip_2">
+              <TextField type="input"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  required
+                  id="name"
+                  label="Enter Your Name"
+                  name="name"
+                  autoFocus
+                  value={prof_name} onChange={e=>setProf_name(e.target.value)}
+                />
+                </div>
+                <div class="ip_2">
+                <TextField type="input"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  required
+                  id="I_name"
+                  label="Enter Institute Name"
+                  name="I_name"
+                  autoFocus
+                  value={college_name} onChange={e=>setCollege_name(e.target.value)}
+                />
+                </div>
+                <div>
+                <TextField type="input"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  required
+                  id="C_name"
+                  label="Enter Course Name"
+                  name="C_name"
+                  autoFocus
+                  value={course_name} onChange={e=>setCourse_name(e.target.value)}
+                />
+                </div>
+                <div >
+                    <RadioGroup aria-label="Type" name="type2" value={type} onChange={handleChange} row={true}>
+                        <FormControlLabel class="radio_2" value="Exam" control={<Radio />} label="Exam" />
+                        <FormControlLabel class="radio_2" value="Practice" control={<Radio />} label="Practice" />
+                    </RadioGroup>
+                </div>
+                <div>
+                <TextField type="input"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  id="marks"
+                  label="Enter Marks"
+                  name="marks"
+                  autoFocus
+
+                  value={marks} onChange={e=>setMarks(e.target.value)}
+                />
+                </div>
+                <div>
+                <TextField type="datetime-local"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  id="s_date"
+                  name="s_date"
+                  autoFocus
+                  value={start_date} onChange={e=>setStart_date(e.target.value)} 
+                />
+                </div>
+                <div>
+                <TextField type="datetime-local"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  id="e_date"
+                  name="e_date"
+                  autoFocus
+                  value={end_date} onChange={e=>setEnd_date(e.target.value)}
+                />
+                </div>
+                <div >
+                  <Typography>Select format of the Question paper:pdf/Excel</Typography>
+                    <RadioGroup aria-label="Type" name="opt2" value={option} onChange={handleOption} row={true}>
+                        <FormControlLabel class="radio_2" value="PDF" control={<Radio />} label="PDF" />
+                        <FormControlLabel class="radio_2" value="EXCEL" control={<Radio />} label="Excel" />
+                    </RadioGroup>
+                </div>
               <div>
-              <TextField type="datetime-local"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                id="s_date"
-                name="s_date"
-                autoFocus
-                value={start_date} onChange={e=>setStart_date(e.target.value)} 
-              />
-              </div>
+              <TextField type="file"
+                  variant="outlined"
+                  margin="normal"
+                  id="paper"
+                  style ={{width: '50%'}}
+                  name="paper"
+                  autoFocus
+                  onChange= {e=>setQuestions(e.target.files[0])}
+                /> 
+                </div>
+                {/* <div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  margin="normal"
+                  color="primary"
+                  style ={{width: '25%'}}
+                  className={classes.submit}
+                  onClick={uploadPaper_submit} >
+                  Upload
+                  </Button>
+              </div> */}
               <div>
-              <TextField type="datetime-local"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                id="e_date"
-                name="e_date"
-                autoFocus
-                value={end_date} onChange={e=>setEnd_date(e.target.value)}
-              />
-              </div>
-              <div >
-                  <RadioGroup aria-label="Type" name="opt2" value={option} onChange={handleOption} row={true}>
-                      <FormControlLabel class="radio_2" value="PDF" control={<Radio />} label="PDF" />
-                      <FormControlLabel class="radio_2" value="EXCEL" control={<Radio />} label="Excel" />
-                  </RadioGroup>
-              </div>
-             <div>
-             <TextField type="file"
-                variant="outlined"
-                margin="normal"
-                id="paper"
-                style ={{width: '50%'}}
-                name="paper"
-                autoFocus
-                onChange= {e=>setQuestions(e.target.files[0])}
-              /> 
-              </div>
-              {/* <div>
-              <Button
-                type="submit"
-                variant="contained"
-                margin="normal"
-                color="primary"
-                style ={{width: '25%'}}
-                className={classes.submit}
-                onClick={uploadPaper_submit} >
-                Upload
-                </Button>
-             </div> */}
-             <div>
-             <TextField type="file"
-                variant="outlined"
-                margin="normal"
-                id="paper"
-                style ={{width: '50%'}}
-                name="paper"
-                autoFocus
-                onChange = {e=>setStudent(e.target.files[0])}
-              /> 
-              </div>
-              <div>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                style ={{width: '25%'}}
-                className={classes.submit}
-                onClick={handleSubmit} >
-                Submit
-                </Button>
-              </div>
-              </form>
-              {/* <div>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                style ={{width: '25%'}}
-                className={classes.submit}
-                onClick={uploadList_submit} >
-                Upload
-                </Button>
-             </div> */}
-             
-        </Fragment>
-    );
+              <TextField type="file"
+                  variant="outlined"
+                  margin="normal"
+                  id="paper"
+                  style ={{width: '50%'}}
+                  name="paper"
+                  autoFocus
+                  onChange = {e=>setStudent(e.target.files[0])}
+                /> 
+                </div>
+                <div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  style ={{width: '25%'}}
+                  className={classes.submit}
+                  onClick={handleSubmit} >
+                  Submit
+                  </Button>
+                </div>
+                </form>
+                {/* <div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  style ={{width: '25%'}}
+                  className={classes.submit}
+                  onClick={uploadList_submit} >
+                  Upload
+                  </Button>
+              </div> */}
+              
+          </Fragment>
+      );
 }
 
 export default Testform;

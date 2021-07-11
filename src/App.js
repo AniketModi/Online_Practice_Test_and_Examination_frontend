@@ -8,10 +8,12 @@ import React from 'react';
 import Paper from './paper';
 import Logout from './logout';
 import CreatTest from './Test_form';
-import Guide from './Guide'
+import Guide from './Guide';
+import Admin_main from './Admin_main';
+import Admin from './Admin'
 
 import {BrowserRouter , Route , Link , NavLink , Switch} from 'react-router-dom';
-function App() {
+function App() {  
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,6 +27,8 @@ function App() {
             <Route path="/logout" component={Logout} exact={true}/>
             <Route path="/creattest" component={CreatTest} exact={true}/>
             <Route path="/template" component={Guide} exact={true}/>
+            <Route path="/admin/main" component={Admin_main} exact={true}/>
+            <Route path="/admin" component={Admin} exact={true}/>
         </Switch>    
       </BrowserRouter>
     </div>
