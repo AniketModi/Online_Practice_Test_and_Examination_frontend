@@ -20,7 +20,7 @@ const Testform = ()=>{
     const [course_name,setCourse_name]=useState("");
     const [prof_name,setProf_name]=useState("");
     const [type,setType]=useState("");
-   // const [mode,setMode]=useState("");
+    const [option,setOp]=useState("");
     const [start_date,setStart_date]=useState("");
     const [end_date,setEnd_date]=useState("");
     const [marks,setMarks]=useState();
@@ -30,8 +30,8 @@ const Testform = ()=>{
 
     const handleSubmit = async(e)=>{
       e.preventDefault();
-        if(title.length!==0 && college_name.length!==0 && course_name.length!==0 && prof_name.length!==0  && type.length!==0 && questions!=null){
-               dataHandle();         
+        if(title.length!==0 && college_name.length!==0 && course_name.length!==0 && prof_name.length!==0  && type.length!==0 && questions!=null && option.length!==0){
+               dataHandle();  
         }
         else{
             Swal.fire({
@@ -44,20 +44,31 @@ const Testform = ()=>{
         }
     }
 
-
     const dataHandle = async() => {
         try {       
                 const body = [title,college_name,course_name,prof_name,type,start_date,end_date,marks];
                 console.log(body);
                 const head = {headers:  {"Content-Type": "application/json"}};
-                const res1 = await axios.post(`http://localhost:4000/create_test`, JSON.stringify(body),head)
-                console.log("response");
-                console.log(res1.data);  
-                if(res1.data.length!==0){
-                    uploadPaper_submit(res1.data);
-                }else{
-                  console.log("not going")
-                }            
+                if(option==="PDF"){
+                    const res1 = await axios.post(`http://localhost:4000/create_test`, JSON.stringify(body),head)
+                    console.log("response");
+                    console.log(res1.data);  
+                    if(res1.data.length!==0){
+                      uploadPaper_submit(res1.data);
+                     }else{
+                    console.log("not going")
+                    }
+                }  
+                else{
+                  const res2 = await axios.post(`http://localhost:4000/create_test/own`, JSON.stringify(body),head)
+                    console.log("response");
+                    console.log(res2.data);  
+                    if(res2.data.length!==0){
+                      upload_xlpaper(res2.data);
+                     }else{
+                    console.log("not going")
+                    }
+                }          
             } catch (error) {
                   console.log(error)
                 }
@@ -77,6 +88,19 @@ const Testform = ()=>{
             console.log(error);
         }
     }
+    const upload_xlpaper = async(paper_id)=>{
+      try {
+              const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+              let fd = new FormData();
+              fd.append('file',questions)
+              const res =await axios.post(`http://localhost:4000/create_test/paper_xl/${paper_id}`, fd, config)
+              console.log("res");
+              console.log(res);
+              uploadList_submit(paper_id);
+      } catch (error) {
+          console.log(error);
+      }
+  }
 
     const uploadList_submit =async (paper_id)=>{
         try {
@@ -105,6 +129,10 @@ const Testform = ()=>{
     const handleChange = (event) => {
         setType(event.target.value);
     };
+
+    const handleOption = (event)=>{
+      setOp(event.target.value)
+    }
     const classes = useStyles();
     return (
         <Fragment>
@@ -202,6 +230,12 @@ const Testform = ()=>{
                 autoFocus
                 value={end_date} onChange={e=>setEnd_date(e.target.value)}
               />
+              </div>
+              <div >
+                  <RadioGroup aria-label="Type" name="opt2" value={option} onChange={handleOption} row={true}>
+                      <FormControlLabel class="radio_2" value="PDF" control={<Radio />} label="PDF" />
+                      <FormControlLabel class="radio_2" value="EXCEL" control={<Radio />} label="Excel" />
+                  </RadioGroup>
               </div>
              <div>
              <TextField type="file"
