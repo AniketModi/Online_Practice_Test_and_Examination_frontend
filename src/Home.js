@@ -171,7 +171,7 @@ export default function PrimarySearchAppBar() {
 
     async function prac1(){
       await axios
-      .get('http://localhost:4000/home/practice')
+      .get(`${process.env.REACT_APP_URL}/home/practice`)
       .then((e)=>{
         console.log("prac");
         setData(e.data);
@@ -186,7 +186,7 @@ export default function PrimarySearchAppBar() {
     }
     async function wish1(){
       await axios
-      .get(`http://localhost:4000/home/wishlist`)
+      .get(`${process.env.REACT_APP_URL}/home/wishlist`)
       .then((e)=>{
         console.log("wishlist");
         setDatawish(e.data);
@@ -203,7 +203,7 @@ export default function PrimarySearchAppBar() {
 
     async function wishlist({id}){
       await axios
-      .post("http://localhost:4000/home/wishlist",{
+      .post(`${process.env.REACT_APP_URL}/home/wishlist`,{
          // email:email,
           id:id,
       })
@@ -224,7 +224,7 @@ export default function PrimarySearchAppBar() {
   async function ondelete({id,email})
   {
     await axios
-    .delete("http://localhost:4000/home/wishlist",{
+    .delete(`${process.env.REACT_APP_URL}/home/wishlist`,{
       data: {
        // email:email,
         id:id,

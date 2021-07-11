@@ -86,7 +86,7 @@ export default function SignIn() {
   const check = async (e)=>{
     
     const check1 = await axios
-    .post( 'http://localhost:4000/sendEmail/email',{
+    .post( `${process.env.REACT_APP_URL}/sendEmail/email`,{
       email:email,
     })
     .then((e)=>{
@@ -112,7 +112,7 @@ export default function SignIn() {
       else
       {
         axios
-        .post('http://localhost:4000/SignUp',{
+        .post(`${process.env.REACT_APP_URL}/SignUp`,{
           name:name,
           email:email,
           password:pass,

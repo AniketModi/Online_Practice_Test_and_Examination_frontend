@@ -98,7 +98,7 @@ const Paper = (e) => {
 
         async function func(){
             await axios
-            .get(`http://localhost:4000/practice/view/${id}`)
+            .get(`${process.env.REACT_APP_URL}/practice/view/${id}`)
             .then((e)=>{
                 console.log(e.data);
                 setData(e.data);
