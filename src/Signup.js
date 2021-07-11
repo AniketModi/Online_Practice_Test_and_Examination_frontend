@@ -90,7 +90,7 @@ export default function SignIn() {
       email:email,
     })
     .then((e)=>{
-      console.log(e);
+     // console.log(e);
       setPasscode(e.data);
       //console.log(e.data);
     })
@@ -120,7 +120,7 @@ export default function SignIn() {
           role:state===true?"Student":"Professor",
         })
         .then((e)=>{
-          console.log(e);
+         // console.log(e);
         })
         .catch((err)=>{
           console.log(err,"Jay");

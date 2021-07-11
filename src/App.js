@@ -7,9 +7,13 @@ import Profileform from './Profile_form';
 import React from 'react';
 import Paper from './paper';
 import Logout from './logout';
+import CreatTest from './Test_form';
+import Guide from './Guide';
+import Admin_main from './Admin_main';
+import Admin from './Admin'
 
 import {BrowserRouter , Route , Link , NavLink , Switch} from 'react-router-dom';
-function App() {
+function App() {  
   return (
     <div className="App">
       <BrowserRouter>
@@ -21,6 +25,10 @@ function App() {
             <Route path="/profilepage" component={Profile_Page} exact={true}/>
             <Route path="/profileform" component={Profileform} exact={true}/>
             <Route path="/logout" component={Logout} exact={true}/>
+            <Route path="/creattest" component={CreatTest} exact={true}/>
+            <Route path="/template" component={Guide} exact={true}/>
+            <Route path="/admin/main" component={Admin_main} exact={true}/>
+            <Route path="/admin" component={Admin} exact={true}/>
         </Switch>    
       </BrowserRouter>
     </div>

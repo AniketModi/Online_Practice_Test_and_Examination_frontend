@@ -6,6 +6,7 @@ import MCQ from './MCQ';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
+import Comments from './Comments';
 
 const useStyles = makeStyles(() => ({
     head: {
@@ -139,16 +140,20 @@ const Paper = (e) => {
             </section>
         </Toolbar>
         </AppBar>
-        <div className={classes.que}>
-            {que.map((e,index)=>{
-                return <Question e={e} index={index}/>;
-            })}
+        
+        <div>
+            <div className={classes.que}>
+                {que.map((e,index)=>{
+                    return <Question e={e} index={index}/>;
+                })}
+            </div>
+            <div className={classes.mcq}>
+                {mcq.map((e,index)=>{
+                    return <MCQ e={e} index={index}/>;
+                })}
+            </div>
         </div>
-        <div className={classes.mcq}>
-            {mcq.map((e,index)=>{
-                return <MCQ e={e} index={index}/>;
-            })}
-        </div>
+        <Comments id={id}/>
         </>
      );
 }
