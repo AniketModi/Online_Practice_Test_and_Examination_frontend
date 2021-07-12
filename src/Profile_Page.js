@@ -62,7 +62,7 @@ const Profile_Page = () => {
 
     useEffect(() => {
         axios 
-        .get(`${process.env.REACT_APP_URL}/profile`)
+        .get(`http://localhost:4000/profile`)
         .then((e)=>{
                 console.log(e);
             setName(e.data.name);

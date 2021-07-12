@@ -86,11 +86,11 @@ export default function SignIn() {
   const check = async (e)=>{
     
     const check1 = await axios
-    .post( `${process.env.REACT_APP_URL}/sendEmail/email`,{
+    .post( 'http://localhost:4000/sendEmail/email',{
       email:email,
     })
     .then((e)=>{
-     // console.log(e);
+      console.log(e);
       setPasscode(e.data);
       //console.log(e.data);
     })
@@ -112,7 +112,7 @@ export default function SignIn() {
       else
       {
         axios
-        .post(`${process.env.REACT_APP_URL}/SignUp`,{
+        .post('http://localhost:4000/SignUp',{
           name:name,
           email:email,
           password:pass,
@@ -120,7 +120,7 @@ export default function SignIn() {
           role:state===true?"Student":"Professor",
         })
         .then((e)=>{
-         // console.log(e);
+          console.log(e);
         })
         .catch((err)=>{
           console.log(err,"Jay");

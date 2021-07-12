@@ -5,21 +5,12 @@ import Tasks from "./Tasks";
 import Comment from "./Comment";
 //import About from './components/About'
 //import "./appstyle.css";    Check it after completing implementation
-// import "./comment.css";
+import "./comment.css";
 // import "./indexstyle.css";
-import { makeStyles } from '@material-ui/core/styles';
-import { CallMissedSharp } from "@material-ui/icons";
 
-const usestyles=makeStyles({
-    text:{
-      color:'#F1757A',
-      marginRight:'85%',
-      position: 'relative',
-    }
-})
+
 export default function App({id}) {
   console.log("Hello jay");
-  const classes=usestyles();
   const [tasks, setTasks] = useState([]);
   const [myid, setmyid] = useState(0);
 
@@ -31,7 +22,7 @@ export default function App({id}) {
 
     const fetchTasks = async () => {
       await axios 
-      .get(`${process.env.REACT_APP_URL}/comment/getcomment/${id}`)
+      .get(`http://localhost:4000/comment/getcomment/${id}`)
       .then((e)=>{
           console.log(e);
           setTasks(e.data);      
@@ -59,7 +50,7 @@ export default function App({id}) {
     //setTasks(tasks => [...tasks, task]);
     console.log("task Added from addtask", tasks);
     const temp = axios
-      .post(`${process.env.REACT_APP_URL}/comment/postcomment`, {
+      .post('http://localhost:4000/comment/postcomment', {
         comment: task.comment,
         que_paper_id:id,
       })
@@ -89,7 +80,7 @@ export default function App({id}) {
     <div>
       {(
         <>
-          <div className={classes.text}>
+          <div className="container" style={{ margin: "5%" }}>
             <h1>Comments</h1>
             <Comment onAdd={addTask} />
             {tasks.length > 0 ? <Tasks tasks={tasks} /> : "No Comments"}

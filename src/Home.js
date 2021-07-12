@@ -104,7 +104,6 @@ const useStyles = makeStyles((theme) => ({
   },
   createTest:{
     backgroundColor:"white",
-    marginLeft:'10px'
   },
 }));
 
@@ -175,7 +174,7 @@ export default function PrimarySearchAppBar() {
 
     useEffect(() => {
       axios 
-        .get(`${process.env.REACT_APP_URL}/profile`)
+        .get(`http://localhost:4000/profile`)
         .then((e)=>{
           console.log(e);
           setRole(e.data.role);
@@ -189,7 +188,7 @@ export default function PrimarySearchAppBar() {
 
     async function prac1(){
       await axios
-      .get(`${process.env.REACT_APP_URL}/home/practice`)
+      .get('http://localhost:4000/home/practice')
       .then((e)=>{
         console.log("prac");
         setData(e.data);
@@ -204,7 +203,7 @@ export default function PrimarySearchAppBar() {
     }
     async function wish1(){
       await axios
-      .get(`${process.env.REACT_APP_URL}/home/wishlist`)
+      .get(`http://localhost:4000/home/wishlist`)
       .then((e)=>{
         console.log("wishlist");
         setDatawish(e.data);
@@ -221,7 +220,7 @@ export default function PrimarySearchAppBar() {
 
     async function wishlist({id}){
       await axios
-      .post(`${process.env.REACT_APP_URL}/home/wishlist`,{
+      .post("http://localhost:4000/home/wishlist",{
          // email:email,
           id:id,
       })
@@ -242,7 +241,7 @@ export default function PrimarySearchAppBar() {
   async function ondelete({id,email})
   {
     await axios
-    .delete(`${process.env.REACT_APP_URL}/home/wishlist`,{
+    .delete("http://localhost:4000/home/wishlist",{
       data: {
        // email:email,
         id:id,
@@ -270,11 +269,6 @@ export default function PrimarySearchAppBar() {
     history.push('./creattest');
   }
 
-  function template_test(){
-    history.push('./template');
-  }
-
-  
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -297,8 +291,7 @@ export default function PrimarySearchAppBar() {
             />
           </div>
           <div className={classes.grow} />
-          {role === "Professor" && <Button className={classes.createTest} onClick={createtest}>Create Test</Button>}
-           {role === "Professor" && <Button className={classes.createTest} onClick={template_test}>Template</Button>}
+           {role === "Professor" && <Button className={classes.createTest} onClick={createtest}>Create Test</Button>}
           <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"
