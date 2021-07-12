@@ -52,12 +52,8 @@ const useStyles = makeStyles(() => ({
         marginRight:"20px",
         fontSize:"20px",
         border:"1px solid blue",
-        display:"flex"
     },
-    optionA:{
-        align:"center",
-        margin:'auto'
-    }
+
   }));
 
 const  MCQ = ({e,index})=>{
@@ -77,10 +73,10 @@ const  MCQ = ({e,index})=>{
                 <Button className={classes.in} onClick={change} >View</Button>
             </div>
             <div className={classes.option1}>
-                <div className={classes.optionA}>A : {e.option[0]}</div>
-                <div className={classes.optionA}>B : {e.option[1]}</div>
-                <div className={classes.optionA}>C : {e.option[2]}</div>
-                <div className={classes.optionA}>D : {e.option[3]}</div>
+                <div>A : {e.option[0]}</div>
+                <div>B : {e.option[1]}</div>
+                <div>C : {e.option[2]}</div>
+                <div>D : {e.option[3]}</div>
             </div>
             {
                 temp &&
