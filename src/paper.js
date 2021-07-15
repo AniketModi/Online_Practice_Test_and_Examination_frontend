@@ -76,6 +76,12 @@ const useStyles = makeStyles(() => ({
     },
     que:{
     },
+    paper:{
+        border:'2px solid black',
+        margin:'10px',
+        height:'600px',
+        overflow:'scroll'
+    }
 
   }));
 
@@ -141,7 +147,7 @@ const Paper = (e) => {
         </Toolbar>
         </AppBar>
         
-        <div>
+        <div className={classes.paper}>
             <div className={classes.que}>
                 {que.map((e,index)=>{
                     return <Question e={e} index={index}/>;

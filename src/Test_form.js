@@ -250,7 +250,7 @@ const Testform =()=>{
                   value={end_date} onChange={e=>setEnd_date(e.target.value)}
                 />
                 </div>
-                <div >
+                <div>
                   <Typography>Select format of the Question paper:pdf/Excel</Typography>
                     <RadioGroup aria-label="Type" name="opt2" value={option} onChange={handleOption} row={true}>
                         <FormControlLabel class="radio_2" value="PDF" control={<Radio />} label="PDF" />
@@ -258,6 +258,7 @@ const Testform =()=>{
                     </RadioGroup>
                 </div>
               <div>
+              <Typography>Upload the paper here:</Typography>
               <TextField type="file"
                   variant="outlined"
                   margin="normal"
@@ -281,6 +282,7 @@ const Testform =()=>{
                   </Button>
               </div> */}
               <div>
+              <Typography>Upload the student List here</Typography>
               <TextField type="file"
                   variant="outlined"
                   margin="normal"

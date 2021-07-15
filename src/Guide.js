@@ -111,12 +111,12 @@ export default function Guide(){
             
         await axios.get(`http://localhost:4000/guide/list`,{responseType: 'arraybuffer'}).then((response) => {
             console.log(response)
-            const newBlob = new Blob([response.data], {type: "application/csv"});
+            const newBlob = new Blob([response.data], {type: "application/xlsx"});
             //const dataUrl = window.URL.createObjectURL(newBlob);
             let url = window.URL.createObjectURL(newBlob);
             let a = document.createElement('a');
              a.href = url;
-             a.download = `student_list.csv`
+             a.download = `student_list.xlsx`
              a.click();
              Swal.fire({
               position: 'top-center',
