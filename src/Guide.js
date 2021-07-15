@@ -75,7 +75,7 @@ export default function Guide(){
     const getTest = async(e) => {
       try {
             
-        await axios.get(`http://localhost:4000/guide/paper`,{responseType: 'arraybuffer'}).then((response) => {
+        await axios.get(`${process.env.REACT_APP_URL}/guide/paper`,{responseType: 'arraybuffer'}).then((response) => {
             console.log(response)
             const newBlob = new Blob([response.data], {type: "application/xlsx"});
             //const dataUrl = window.URL.createObjectURL(newBlob);
@@ -109,7 +109,7 @@ export default function Guide(){
     const getList = async(e)=>{
       try {
             
-        await axios.get(`http://localhost:4000/guide/list`,{responseType: 'arraybuffer'}).then((response) => {
+        await axios.get(`${process.env.REACT_APP_URL}/guide/list`,{responseType: 'arraybuffer'}).then((response) => {
             console.log(response)
             const newBlob = new Blob([response.data], {type: "application/xlsx"});
             //const dataUrl = window.URL.createObjectURL(newBlob);

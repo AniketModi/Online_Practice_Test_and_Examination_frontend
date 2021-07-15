@@ -5,21 +5,12 @@ import Tasks from "./Tasks";
 import Comment from "./Comment";
 //import About from './components/About'
 //import "./appstyle.css";    Check it after completing implementation
-// import "./comment.css";
+import "./comment.css";
 // import "./indexstyle.css";
-import { makeStyles } from '@material-ui/core/styles';
-import { CallMissedSharp } from "@material-ui/icons";
 
-const usestyles=makeStyles({
-    text:{
-      color:'#F1757A',
-      marginRight:'85%',
-      position: 'relative',
-    }
-})
+
 export default function App({id}) {
   console.log("Hello jay");
-  const classes=usestyles();
   const [tasks, setTasks] = useState([]);
   const [myid, setmyid] = useState(0);
 
@@ -89,7 +80,7 @@ export default function App({id}) {
     <div>
       {(
         <>
-          <div className={classes.text}>
+          <div className="container" style={{ margin: "5%" }}>
             <h1>Comments</h1>
             <Comment onAdd={addTask} />
             {tasks.length > 0 ? <Tasks tasks={tasks} /> : "No Comments"}

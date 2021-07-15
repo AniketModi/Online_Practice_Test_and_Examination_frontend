@@ -35,7 +35,7 @@ const Testform = ()=>{
     useEffect( (e)=>{
         async function func(){
             await axios
-        .get(`${process.env.REACT_APP_URL}/profile`)
+        .get(`http://localhost:4000/profile`)
         .then((e)=>{
             setname(e.data.name);
             setNumber(e.data.contact);
@@ -62,7 +62,7 @@ const Testform = ()=>{
         e.preventDefault();
         async function func() {
             await axios
-            .put(`${process.env.REACT_APP_URL}/profile`,{
+            .put(`http://localhost:4000/profile`,{
                 //email:email,
                 name:name,
                 Gender:type,
