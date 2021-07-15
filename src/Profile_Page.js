@@ -43,6 +43,13 @@ const useStyle = makeStyles((theme)=>({
             backgroundColor:'#ff4081',
             fontSize:'18px'
         },
+        back:{
+            marginLeft:'5%',
+            width: theme.spacing(20),
+            height: theme.spacing(6),
+            backgroundColor:'#ff4081',
+            fontSize:'18px'            
+        }
 }));
 
 
@@ -100,6 +107,9 @@ const Profile_Page = () => {
                     </div>
                     <Button variant="contained" color="secondary" href="/profileform" size='large' className={classes.large}>
                         Update
+                    </Button>
+                    <Button variant="contained" color="secondary" className={classes.back} href="/main" size='large' >
+                        Back
                     </Button>
                 </div>
             </Grid>

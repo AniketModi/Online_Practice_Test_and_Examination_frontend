@@ -178,91 +178,100 @@ const Testform = ()=>{
                 name="marks"
                 autoFocus
 
-                value={marks} onChange={e=>setMarks(e.target.value)}
-              />
-              </div>
+                  value={marks} onChange={e=>setMarks(e.target.value)}
+                />
+                </div>
+                <div>
+                <TextField type="datetime-local"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  id="s_date"
+                  name="s_date"
+                  autoFocus
+                  value={start_date} onChange={e=>setStart_date(e.target.value)} 
+                />
+                </div>
+                <div>
+                <TextField type="datetime-local"
+                  variant="outlined"
+                  margin="normal"
+                  style ={{width: '50%'}}
+                  id="e_date"
+                  name="e_date"
+                  autoFocus
+                  value={end_date} onChange={e=>setEnd_date(e.target.value)}
+                />
+                </div>
+                <div>
+                  <Typography>Select format of the Question paper:pdf/Excel</Typography>
+                    <RadioGroup aria-label="Type" name="opt2" value={option} onChange={handleOption} row={true}>
+                        <FormControlLabel class="radio_2" value="PDF" control={<Radio />} label="PDF" />
+                        <FormControlLabel class="radio_2" value="EXCEL" control={<Radio />} label="Excel" />
+                    </RadioGroup>
+                </div>
               <div>
-              <TextField type="datetime-local"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                id="s_date"
-                name="s_date"
-                autoFocus
-                value={start_date} onChange={e=>setStart_date(e.target.value)} 
-              />
-              </div>
+              <Typography>Upload the paper here:</Typography>
+              <TextField type="file"
+                  variant="outlined"
+                  margin="normal"
+                  id="paper"
+                  style ={{width: '50%'}}
+                  name="paper"
+                  autoFocus
+                  onChange= {e=>setQuestions(e.target.files[0])}
+                /> 
+                </div>
+                {/* <div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  margin="normal"
+                  color="primary"
+                  style ={{width: '25%'}}
+                  className={classes.submit}
+                  onClick={uploadPaper_submit} >
+                  Upload
+                  </Button>
+              </div> */}
               <div>
-              <TextField type="datetime-local"
-                variant="outlined"
-                margin="normal"
-                style ={{width: '50%'}}
-                id="e_date"
-                name="e_date"
-                autoFocus
-                value={end_date} onChange={e=>setEnd_date(e.target.value)}
-              />
-              </div>
-             <div>
-             <TextField type="file"
-                variant="outlined"
-                margin="normal"
-                id="paper"
-                style ={{width: '50%'}}
-                name="paper"
-                autoFocus
-                onChange= {e=>setQuestions(e.target.files[0])}
-              /> 
-              </div>
-              {/* <div>
-              <Button
-                type="submit"
-                variant="contained"
-                margin="normal"
-                color="primary"
-                style ={{width: '25%'}}
-                className={classes.submit}
-                onClick={uploadPaper_submit} >
-                Upload
-                </Button>
-             </div> */}
-             <div>
-             <TextField type="file"
-                variant="outlined"
-                margin="normal"
-                id="paper"
-                style ={{width: '50%'}}
-                name="paper"
-                autoFocus
-                onChange = {e=>setStudent(e.target.files[0])}
-              /> 
-              </div>
-              <div>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                style ={{width: '25%'}}
-                className={classes.submit}
-                onClick={handleSubmit} >
-                Submit
-                </Button>
-              </div>
-              </form>
-              {/* <div>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                style ={{width: '25%'}}
-                className={classes.submit}
-                onClick={uploadList_submit} >
-                Upload
-                </Button>
-             </div> */}
-             
-        </Fragment>
-    );
+              <Typography>Upload the student List here</Typography>
+              <TextField type="file"
+                  variant="outlined"
+                  margin="normal"
+                  id="paper"
+                  style ={{width: '50%'}}
+                  name="paper"
+                  autoFocus
+                  onChange = {e=>setStudent(e.target.files[0])}
+                /> 
+                </div>
+                <div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  style ={{width: '25%'}}
+                  className={classes.submit}
+                  onClick={handleSubmit} >
+                  Submit
+                  </Button>
+                </div>
+                </form>
+                {/* <div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  style ={{width: '25%'}}
+                  className={classes.submit}
+                  onClick={uploadList_submit} >
+                  Upload
+                  </Button>
+              </div> */}
+              
+          </Fragment>
+      );
 }
 
 export default Testform;
